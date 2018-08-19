@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get 'user/:user_id' => 'planter#top'
   get 'user/:user_name/:planter_id' => 'planter#status'
+  post 'planter/:planter_id' => 'planter#update'
+
   get 'planter/new' => 'planter#new'
   post 'planter/create' => 'planter#create'
 

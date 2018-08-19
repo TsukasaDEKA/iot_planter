@@ -1,4 +1,5 @@
 class PlanterController < ApplicationController
+  protect_from_forgery except: :update
   def top
     user = User.find_by(id: params[:user_id])
     @user_name = user.name
@@ -21,5 +22,12 @@ class PlanterController < ApplicationController
   end
 
   def create
+  end
+
+  def update
+    body_params ||= JSON.parse(request.body.read, {:symbolize_names => true})
+    planter_status = PlanterStatus.new(planter_id: params[:planter_id],
+                                       moisture: body_params[:moisture])
+    planter_status.save
   end
 end
