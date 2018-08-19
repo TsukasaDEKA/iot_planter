@@ -1,0 +1,11 @@
+<div class="main top-main">
+  <div class="top-message">
+    <% @planter_list.each do |planter| %>
+      <div class="user-index-item">
+        <%= link_to(planter.name, "/user/#{@user_name}/#{planter.id}")%>
+      </div>
+    <% end %>
+
+    <%= link_to("プランター追加", "/planter/new")%>
+  </div>
+</div>

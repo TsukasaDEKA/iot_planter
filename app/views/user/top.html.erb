@@ -1,0 +1,11 @@
+<div class="main top-main">
+  <div class="top-message">
+    <% @user_list.each do |user| %>
+      <div class="user-index-item">
+        <%= link_to(user.name, "/user/#{user.id}")%>
+      </div>
+    <% end %>
+
+    <%= link_to("新規作成", "/user/new")%>
+  </div>
+</div>

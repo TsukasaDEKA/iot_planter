@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IoT Planter</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= Gon::Base.render_data %>
+    <%= include_gon %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-logo">
+        <!-- 以下のリンクをlink_toメソッドを用いて変更してください -->
+        <%= link_to("IoT Planter", "/")%>
+      </div>
+      <ul class="header-menus">
+        <li>
+          <%= link_to("IoT Planterとは", "/about")%>
+        </li>
+        <li>
+          <%= link_to("ユーザー", "/user")%>
+        </li>
+        <li>
+          <%= link_to("プランター", "/planter")%>
+        </li>
+      </ul>
+    </header>
+    <%= yield %>
+  </body>
+</html>

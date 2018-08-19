@@ -1,0 +1,2 @@
+class PlanterStatus < ApplicationRecord
+end
