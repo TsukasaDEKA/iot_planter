@@ -27,7 +27,7 @@ class PlanterController < ApplicationController
     gon.data_num = planter_statuses.count
     for planter_status in planter_statuses do
       time = planter_status.created_at
-      moisture = ((planter_status.moisture.to_f-20.0) * 10.0 / 4.0).to_i
+      moisture = ((planter_status.moisture.to_f-30.0)/(60.0 - 30.0)*100.0).to_i
       gon.data << {x: time.strftime("%F %H:%M:%S"), y:moisture}
       gon.label << planter_status.created_at
     end
