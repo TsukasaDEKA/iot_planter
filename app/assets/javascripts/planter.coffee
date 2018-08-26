@@ -7,25 +7,29 @@ window.draw_graph = ->
     bgColors = new Array(barNum)
     bdColors = new Array(barNum)
     for i in [0...barNum]
-        bgColors[i] = 'rgba(256, 192, 192, 1)'
-        bdColors[i] = 'rgba(256, 192, 192, 1)'
+        bgColors[i] = 'rgba(256, 256, 256, 0.7)'
+        bdColors[i] = 'rgba(100, 100, 100, 1)'
     myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: gon.label
             datasets: [{
-                label: '# of Votes',
+                label: 'moisture value',
                 data: gon.data,
                 backgroundColor: bgColors,
                 borderColor: bdColors,
-                borderWidth: 1
+                borderWidth: 10,
+                lineTension: 0,
+                fill: true
             }]
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero:true
+                        beginAtZero:true,
+                        min: 0,
+                        max: 100
                     }
                 }]
             }
