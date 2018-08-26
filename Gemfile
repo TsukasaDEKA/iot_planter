@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'momentjs-rails', '>= 2.9.0'
 gem 'chart-js-rails', '~> 0.1.4'
 gem 'gon', '~> 6.2.0'
 

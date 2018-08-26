@@ -1,6 +1,35 @@
-<div class="main posts-index">
+<div class="main status-index">
   <div class="top-message">
     <h1><%= @planter.name %></h1>
+    <%= form_tag("/user/#{@user_name}/#{@planter.id}", method: "get") do %>
+      <ul class="status-time-span">
+        <li>
+          From
+          <%=
+              datetime_select :start_time,
+              :date,
+              use_month_numbers: true,
+              start_year:        2018,
+              end_year:          (Time.now.year),
+              default:           @from
+          %>
+        </li>
+        <li>
+          To
+          <%=
+              datetime_select :end_time,
+              :date,
+              use_month_numbers: true,
+              start_year:     2018,
+              end_year:       (Time.now.year),
+              default:        @to
+          %>
+        </li>
+        <li>
+          <input type="submit" value="更新">
+        </li>
+      </ul>
+    <% end %>
     <canvas class="canvas" id="myChart" width="200" height="70"></canvas>
     <script>draw_graph();</script>
   </div>
