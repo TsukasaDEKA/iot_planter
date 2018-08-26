@@ -1,8 +1,10 @@
-<div class="main top-main">
-  <div class="top-message">
+<div class="main posts-index">
+  <div class="container">
     <% @user_list.each do |user| %>
       <div class="user-index-item">
-        <%= link_to(user.name, "/user/#{user.id}")%>
+        <p>
+          <%= link_to(user.name, "/user/#{user.id}")%>
+        </p>
       </div>
     <% end %>
 

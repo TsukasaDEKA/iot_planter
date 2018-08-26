@@ -29,7 +29,7 @@ window.draw_graph = ->
                     ticks: {
                         beginAtZero:true,
                         min: 0,
-                        max: 100
+                        max: 60
                     }
                 }]
             }
