@@ -1,3 +1,4 @@
 {
-	"moisture":100
+	"time_span":40,
+	"threshold":20
 }

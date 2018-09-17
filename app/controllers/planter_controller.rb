@@ -1,5 +1,7 @@
 class PlanterController < ApplicationController
-  protect_from_forgery except: :update
+  protect_from_forgery except: :status
+  protect_from_forgery except: :setting
+
   def top
     user = User.find_by(id: params[:user_id])
     @user_name = user.name
@@ -39,10 +41,26 @@ class PlanterController < ApplicationController
   def create
   end
 
-  def update
+  def status_update
     body_params ||= JSON.parse(request.body.read, {:symbolize_names => true})
     planter_status = PlanterStatus.new(planter_id: params[:planter_id],
                                        moisture: body_params[:moisture])
     planter_status.save
+  end
+
+  def setting()
+    if params[:planter].present?
+      time_span = params[:planter][:time_span]
+      threshold = params[:planter][:threshold]
+    else
+      body_params ||= JSON.parse(request.body.read, {:symbolize_names => true})
+      time_span = body_params[:time_span]
+      threshold = body_params[:threshold]
+    end
+    target_planter = Planter.find_by(id: params[:planter_id])
+    target_planter.time_span = time_span
+    target_planter.threshold = threshold
+
+    target_planter.save
   end
 end
