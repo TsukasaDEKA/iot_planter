@@ -1,36 +1,57 @@
 <div class="main status-index">
   <div class="top-message">
     <h1><%= @planter.name %></h1>
-    <%= form_tag("/user/#{@user_name}/#{@planter.id}", method: "get") do %>
-      <ul class="status-time-span">
+    <div class="setting_list">
+      <%= form_tag("/user/#{@user_name}/#{@planter.id}", method: "get") do %>
+        <ul class="status-time-span">
+          <li>
+            From
+            <%=
+                datetime_select :start_time,
+                :date,
+                use_month_numbers: true,
+                start_year:        2018,
+                end_year:          (Time.now.year),
+                default:           @from
+            %>
+          </li>
+          <li>
+            To
+            <%=
+                datetime_select :end_time,
+                :date,
+                use_month_numbers: true,
+                start_year:     2018,
+                end_year:       (Time.now.year),
+                default:        @to
+            %>
+          </li>
+          <li>
+            <input type="submit" value="更新">
+          </li>
+        </ul>
+      <% end %>
+    </div>
+
+    <canvas class="canvas" id="myChart" width="200" height="70"></canvas>
+    <script>draw_graph();</script>
+    <%= form_for @planter, url: "/planter/#{@planter.id}/setting",html: {method: "post"} do |setting| %>
+      <ul class="setting-update">
         <li>
-          From
-          <%=
-              datetime_select :start_time,
-              :date,
-              use_month_numbers: true,
-              start_year:        2018,
-              end_year:          (Time.now.year),
-              default:           @from
-          %>
+          <%=setting.label :time_span, value="インターバル時間"%>
+          <%=setting.text_field :time_span%>
+          分
         </li>
         <li>
-          To
-          <%=
-              datetime_select :end_time,
-              :date,
-              use_month_numbers: true,
-              start_year:     2018,
-              end_year:       (Time.now.year),
-              default:        @to
-          %>
+          <%=setting.label :threshold, value="閾値水分量" %>
+          <%=setting.text_field :threshold%>
+          ％
         </li>
         <li>
-          <input type="submit" value="更新">
+          <%= setting.submit "設定変更"%>
+          <!-- <input type="submit" value="設定"> -->
         </li>
       </ul>
     <% end %>
-    <canvas class="canvas" id="myChart" width="200" height="70"></canvas>
-    <script>draw_graph();</script>
   </div>
 </div>
