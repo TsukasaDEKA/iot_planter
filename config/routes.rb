@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   get  'planter/new' => 'planter#new'
   post 'planter/create' => 'planter#create'
-  post 'planter/:planter_id/setting' => 'planter#setting'
+  get  'planter/:planter_id/setting' => 'planter#return_setting'
+  post 'planter/:planter_id/setting' => 'planter#update_setting'
   post 'planter/:planter_id/status_update' => 'planter#status_update'
 
 end

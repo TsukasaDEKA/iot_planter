@@ -1,6 +1,6 @@
 class PlanterController < ApplicationController
   protect_from_forgery except: :status
-  protect_from_forgery except: :setting
+  protect_from_forgery except: :return_setting
 
   def top
     user = User.find_by(id: params[:user_id])
@@ -48,7 +48,14 @@ class PlanterController < ApplicationController
     planter_status.save
   end
 
-  def setting()
+  def return_setting
+    @planter = Planter.find_by(id: params[:planter_id])
+
+    planter_status = {'time_span' => @planter.time_span, 'threshold' => @planter.threshold}
+    render :json => planter_status
+  end
+
+  def update_setting()
     if params[:planter].present?
       time_span = params[:planter][:time_span]
       threshold = params[:planter][:threshold]
