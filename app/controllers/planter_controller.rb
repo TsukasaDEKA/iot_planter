@@ -4,6 +4,7 @@ class PlanterController < ApplicationController
 
   def top
     user = User.find_by(id: params[:user_id])
+    @user_id = user.id
     @user_name = user.name
     @planter_list = Planter.where(user_id: params[:user_id])
   end
@@ -19,6 +20,7 @@ class PlanterController < ApplicationController
     else
       @to = Time.current()
     end
+    @user_id = User.find_by(name: params[:user_name]).id
     @user_name = params[:user_name]
     @planter = Planter.find_by(id: params[:planter_id])
     planter_statuses = PlanterStatus.where(
@@ -29,7 +31,7 @@ class PlanterController < ApplicationController
     gon.data_num = planter_statuses.count
     for planter_status in planter_statuses do
       time = planter_status.created_at
-      moisture = ((planter_status.moisture.to_f-30.0)/(60.0 - 30.0)*100.0).to_i
+      moisture = planter_status.moisture.to_i
       gon.data << {x: time.strftime("%F %H:%M:%S"), y:moisture}
       gon.label << planter_status.created_at
     end

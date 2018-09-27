@@ -12,31 +12,29 @@
 
 ActiveRecord::Schema.define(version: 2018_09_17_050103) do
 
-  create_table "planter_statuses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "planter_id"
-    t.integer "moisture"
+  create_table "planter_statuses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "planter_id"
+    t.integer "moisture"
     t.index ["planter_id"], name: "index_planter_statuses_on_planter_id"
   end
 
-  create_table "planters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "planters", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.string "name", limit: 32
     t.integer "time_span", default: 30, null: false
     t.integer "threshold", default: 50, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_planters_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", limit: 32
-    t.string "uuid", limit: 32
+  create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", limit: 32
+    t.string "uuid", limit: 32
   end
 
-  add_foreign_key "planter_statuses", "planters"
-  add_foreign_key "planters", "users"
 end
