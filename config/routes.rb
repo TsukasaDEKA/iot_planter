@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'planter/create' => 'planter#create'
   get  'planter/:planter_id/setting' => 'planter#return_setting'
   post 'planter/:planter_id/setting' => 'planter#update_setting'
+  post 'planter/:planter_id/setting/threshold' => 'planter#update_threshold'
+  post 'planter/:planter_id/setting/time_span' => 'planter#update_time_span'
   post 'planter/:planter_id/status_update' => 'planter#status_update'
 
 end

@@ -1,6 +1,8 @@
 class PlanterController < ApplicationController
-  protect_from_forgery except: :status
+  protect_from_forgery except: :status_update
   protect_from_forgery except: :return_setting
+  protect_from_forgery except: :update_time_span
+  protect_from_forgery except: :update_threshold
 
   def top
     user = User.find_by(id: params[:user_id])
@@ -70,6 +72,22 @@ class PlanterController < ApplicationController
     target_planter.time_span = time_span
     target_planter.threshold = threshold
 
+    target_planter.save
+  end
+
+  def update_time_span
+    body_params ||= JSON.parse(request.body.read, {:symbolize_names => true})
+    time_span = body_params[:time_span]
+    target_planter = Planter.find_by(id: params[:planter_id])
+    target_planter.time_span = time_span
+    target_planter.save
+  end
+
+  def update_threshold
+    body_params ||= JSON.parse(request.body.read, {:symbolize_names => true})
+    threshold = body_params[:threshold]
+    target_planter = Planter.find_by(id: params[:planter_id])
+    target_planter.threshold = threshold
     target_planter.save
   end
 end
