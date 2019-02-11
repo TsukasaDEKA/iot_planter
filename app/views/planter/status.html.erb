@@ -2,7 +2,7 @@
   <div class="top-message">
     <h1><%= @planter.name %></h1>
     <div class="setting_list">
-      <%= form_tag("/user/#{@user_name}/#{@planter.id}", method: "get") do %>
+      <%= form_with(url:"/user/#{@user_name}/#{@planter.id}", method: "get") do %>
         <ul class="status-time-span">
           <li>
             From
